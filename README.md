@@ -1,59 +1,259 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚗 SIRA - Sistema Integral de Repuestos Automotores
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Sistema web de gestión de inventario desarrollado para **Italfiat Repuestos** - Formosa, Argentina
 
-## About Laravel
+## Descripción del Proyecto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+SIRA es un sistema web diseñado para modernizar la gestión de inventario de repuestos automotores en Italfiat Repuestos, una empresa familiar con más de 15 años de trayectoria en Formosa.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Problema que resuelve:
+- ❌ Control manual de inventario propenso a errores
+- ❌ Demoras en consultas de stock y precios
+- ❌ Falta de trazabilidad en movimientos de productos
+- ❌ Acceso no controlado a la información crítica
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Solución implementada:
+- ✅ Sistema web con control de roles (Admin/Empleado)
+- ✅ Gestión CRUD completa de productos y categorías
+- ✅ Registro de movimientos de stock en tiempo real
+- ✅ Consultas rápidas y búsquedas eficientes
+- ✅ Interfaz responsive y fácil de usar
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Stack Tecnológico
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| **Laravel** | 12.x | Framework backend (MVC) |
+| **PHP** | 8.2+ | Lenguaje del servidor |
+| **MySQL** | 8.0 | Base de datos relacional |
+| **Blade** | - | Motor de plantillas |
+| **Tailwind CSS** | 3.x | Framework CSS |
+| **Alpine.js** | 3.x | Interactividad frontend |
+| **Laravel Breeze** | - | Autenticación y autorización |
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Arquitectura del Sistema
 
-### Premium Partners
+### Patrón MVC (Model-View-Controller)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```
+├── app/
+│   ├── Http/Controllers/    # Lógica de negocio
+│   ├── Models/              # Modelos Eloquent
+│   └── Middleware/          # Autenticación y autorización
+├── database/
+│   ├── migrations/          # Estructura de BD
+│   └── seeders/             # Datos de prueba
+├── resources/
+│   └── views/               # Vistas Blade
+└── routes/
+    └── web.php              # Rutas de la aplicación
+```
 
-## Contributing
+### Modelos principales:
+- **User**: Usuarios con roles (admin/empleado)
+- **Producto**: Repuestos automotores
+- **Categoria**: Clasificación de productos
+- **Movimiento**: Entradas/salidas de stock
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Requisitos Previos
 
-## Code of Conduct
+- PHP >= 8.2
+- Composer
+- MySQL >= 8.0
+- Node.js >= 18 (para assets)
+- Git
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Instalación y Configuración
 
-## Security Vulnerabilities
+### 1. Clonar el repositorio
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+git clone https://github.com/nahuellc1/tifsira.git
+cd tifsira
+```
 
-## License
+### 2. Instalar dependencias
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+# Dependencias de PHP
+composer install
+
+# Dependencias de Node.js
+npm install
+```
+
+### 3. Configurar variables de entorno
+
+```bash
+# Copiar archivo de ejemplo
+cp .env.example .env
+
+# Generar key de aplicación
+php artisan key:generate
+```
+
+### 4. Configurar base de datos
+
+Edita el archivo `.env` con tus credenciales:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sira_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Ejecutar migraciones y seeders
+
+```bash
+# Crear tablas
+php artisan migrate
+
+# Cargar datos de prueba
+php artisan db:seed
+```
+
+### 6. Compilar assets
+
+```bash
+npm run dev
+```
+
+### 7. Iniciar servidor de desarrollo
+
+```bash
+php artisan serve
+```
+
+Accede a la aplicación en: **http://localhost:8000**
+
+---
+
+## 👥 Usuarios de Prueba
+
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Administrador | admin@italfiat.com | password |
+| Empleado | empleado@italfiat.com | password |
+
+---
+
+## 📱 Funcionalidades Principales
+
+### Para Administradores:
+- ➕ Crear, editar y eliminar productos
+- 📦 Gestionar categorías de repuestos
+- 📊 Registrar movimientos de stock (entradas/salidas)
+- 💰 Actualizar precios de productos
+- 👥 Control total del sistema
+
+### Para Empleados:
+- 🔍 Consultar catálogo de productos
+- 📋 Ver stock y precios actualizados
+- 🔎 Buscar productos por código o nombre
+- 📂 Filtrar por categorías
+
+---
+
+## 🎯 Metodología de Desarrollo
+
+### Framework Ágil: **Scrum**
+
+- **Sprints**: 4 sprints de 2 semanas
+- **Equipo**: 2 desarrolladores
+- **Duración total**: 190 horas
+
+### Roles del equipo:
+- **Mikaela Alvarez**:  Backend- Frontend (vistas, diseño, validaciones)
+- **Nahuel Coronel**: Backend- Frontend (controladores, BD, autenticación)
+
+
+## 🔒 Seguridad
+
+- 🔐 Contraseñas encriptadas con bcrypt
+- 🛡️ Middleware de autorización por roles
+- 🚫 Protección CSRF en formularios
+- ✅ Validación de datos en servidor
+- 🔑 Gestión segura de sesiones con Laravel Breeze
+
+---
+
+## 📊 Base de Datos
+
+### Modelo Relacional:
+
+```
+users (id, name, email, password, role)
+  ↓
+productos (id, codigo, nombre, descripcion, precio, stock, categoria_id)
+  ↓
+categorias (id, nombre, descripcion)
+  ↓
+movimientos (id, producto_id, user_id, tipo, cantidad, fecha)
+```
+### Relaciones:
+- `productos → categorias` (N:1)
+- `productos → movimientos` (1:N)
+- `users → movimientos` (1:N)
+
+---
+## 🧪 Testing
+
+### Ejecutar pruebas:
+
+```bash
+php artisan test
+```
+
+_(Nota: Las pruebas se implementarán en futuras versiones)_
+
+---
+## 📈 Roadmap - Funcionalidades Futuras
+
+- [ ] Módulo de ventas y facturación
+- [ ] Gestión de clientes y cuentas corrientes
+- [ ] Sistema de alertas de stock mínimo
+- [ ] Reportes estadísticos avanzados
+- [ ] Exportación de datos a Excel/PDF
+- [ ] API REST para integraciones
+- [ ] Código de barras para productos
+
+---
+
+## 👨‍💻 Autores
+
+| Alumno | Legajo | Responsabilidad |
+|--------|--------|-----------------|
+| **Mikaela Alvarez** | 29130 | Frontend & UX |
+| **Nahuel Coronel** | 29150 | Backend & BD |
+
+**Materia**: Metodología de Sistemas II  
+**Institución**: UTN - Tecnicatura Universitaria en Programación  
+**Año**: 2025
+
+---
+
+## 📄 Licencia
+
+Este proyecto fue desarrollado con fines académicos para la empresa **Italfiat Repuestos** como Trabajo Final Integrador (TFI).
+
+---
+
+## 🙏 Agradecimientos
+
+- **Wenceslao Coronel** - Tutor en Italfiat Repuestos
+- **UTN Formosa** - Tecnicatura Universitaria en Programación
+- Comunidad de Laravel Argentina
+
+---
+
+## 📞 Contacto
+
+- 📧 Email: nahuelcoronel21@gmail.com - mikaelasolalvarez@gmail.com
+- 🏢 Empresa: Italfiat Repuestos - Formosa, Argentina
