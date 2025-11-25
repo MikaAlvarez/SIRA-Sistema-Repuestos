@@ -17,8 +17,11 @@ class Producto extends Model
         'precio',
     ];
 
+    /**
+     * Relación: Un producto tiene muchos movimientos
+     */
     public function movimientos()
     {
-        return $this->hasMany(StockMovimiento::class);
+        return $this->hasMany(Movimiento::class);
     }
 }
