@@ -24,7 +24,7 @@ jobs:
     - name: Instalar dependencias de Composer
       run: composer install --prefer-dist --no-progress --no-interaction
 
-    - name: Copiar archivo .env
+    - name: Copiar y configurar archivo .env
       run: |
         cp .env.example .env
         php artisan key:generate
@@ -34,10 +34,14 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     
-    - name: Configurar base de datos en .env
+    - name: Configurar base de datos en .env (SQLite)
       run: |
-        echo "DB_CONNECTION=sqlite" >> .env
-        echo "DB_DATABASE=database/database.sqlite" >> .env
+        sed -i "s/DB_CONNECTION=.*/DB_CONNECTION=sqlite/" .env
+        sed -i "s/DB_HOST=.*/DB_HOST=/" .env
+        sed -i "s/DB_PORT=.*/DB_PORT=/" .env
+        sed -i "s/DB_DATABASE=.*/DB_DATABASE=database\/database.sqlite/" .env
+        sed -i "s/DB_USERNAME=.*/DB_USERNAME=/" .env
+        sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=/" .env
     
     - name: Ejecutar migraciones
       run: php artisan migrate --force
@@ -50,4 +54,3 @@ jobs:
     - name: Verificar sintaxis PHP
       run: |
         find app -name "*.php" -exec php -l {} \; | grep -v "No syntax errors"
-
