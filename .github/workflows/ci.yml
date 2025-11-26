@@ -84,3 +84,4 @@ jobs:
         echo "✅ Base de datos migrada"
         echo "✅ Rutas verificadas"
         echo "==========================================="
+        
