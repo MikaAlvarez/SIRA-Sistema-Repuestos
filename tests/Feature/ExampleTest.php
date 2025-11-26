@@ -1,7 +1,8 @@
 <?php
 
-it('returns a successful response', function () {
+test('la ruta principal redirige al login si no está autenticado', function () {
     $response = $this->get('/');
 
-    $response->assertStatus(200);
+    $response->assertStatus(302);
+    $response->assertRedirect('/login');
 });

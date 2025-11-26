@@ -1,259 +1,131 @@
-# 🚗 SIRA - Sistema Integral de Repuestos Automotores
+SIRA — Sistema Integral de Repuestos Automotores
 
-> Sistema web de gestión de inventario desarrollado para **Italfiat Repuestos** - Formosa, Argentina
+Proyecto: SIRA — Gestión de Repuestos
+Autores: Mikaela Alvarez, Nahuel Coronel
+Framework: Laravel 12
+Repositorio: https://github.com/MikaAlvarez/SIRA-Sistema-Repuestos
 
-## Descripción del Proyecto
+* Resumen ejecutivo:
 
-SIRA es un sistema web diseñado para modernizar la gestión de inventario de repuestos automotores en Italfiat Repuestos, una empresa familiar con más de 15 años de trayectoria en Formosa.
+SIRA es una aplicación web para la gestión de repuestos automotores: productos, stock, precios y control de acceso por roles (Administrador / Empleado). El propósito es mejorar el control de inventario y reducir errores por gestión manual.
 
-### Problema que resuelve:
-- ❌ Control manual de inventario propenso a errores
-- ❌ Demoras en consultas de stock y precios
-- ❌ Falta de trazabilidad en movimientos de productos
-- ❌ Acceso no controlado a la información crítica
+* Estado del proyecto:
 
-### Solución implementada:
-- ✅ Sistema web con control de roles (Admin/Empleado)
-- ✅ Gestión CRUD completa de productos y categorías
-- ✅ Registro de movimientos de stock en tiempo real
-- ✅ Consultas rápidas y búsquedas eficientes
-- ✅ Interfaz responsive y fácil de usar
+Funcionalidades implementadas: autenticación con Laravel Breeze, CRUD de productos, búsqueda y filtrado, actualización de stock, gestión de precios, y roles Admin/Empleado.
 
----
+CI: GitHub Actions ejecutando tests y validaciones automáticas.
 
-## Stack Tecnológico
+Tests: Unitarios y de features básicos incluidos y funcionando en CI.
 
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **Laravel** | 12.x | Framework backend (MVC) |
-| **PHP** | 8.2+ | Lenguaje del servidor |
-| **MySQL** | 8.0 | Base de datos relacional |
-| **Blade** | - | Motor de plantillas |
-| **Tailwind CSS** | 3.x | Framework CSS |
-| **Alpine.js** | 3.x | Interactividad frontend |
-| **Laravel Breeze** | - | Autenticación y autorización |
+* Requisitos mínimos para ejecutar el proyecto localmente:
 
----
+PHP 8.2 o superior
 
-## Arquitectura del Sistema
+Composer
 
-### Patrón MVC (Model-View-Controller)
+MySQL (o SQLite para pruebas)
 
-```
-├── app/
-│   ├── Http/Controllers/    # Lógica de negocio
-│   ├── Models/              # Modelos Eloquent
-│   └── Middleware/          # Autenticación y autorización
-├── database/
-│   ├── migrations/          # Estructura de BD
-│   └── seeders/             # Datos de prueba
-├── resources/
-│   └── views/               # Vistas Blade
-└── routes/
-    └── web.php              # Rutas de la aplicación
-```
+Node.js y npm (si se usan assets frontend)
 
-### Modelos principales:
-- **User**: Usuarios con roles (admin/empleado)
-- **Producto**: Repuestos automotores
-- **Categoria**: Clasificación de productos
-- **Movimiento**: Entradas/salidas de stock
+Git
 
-## Requisitos Previos
+* Instalación (local):
 
-- PHP >= 8.2
-- Composer
-- MySQL >= 8.0
-- Node.js >= 18 (para assets)
-- Git
+Clonar el repositorio:
+git clone https://github.com/MikaAlvarez/SIRA-Sistema-Repuestos.git
 
-## Instalación y Configuración
+cd SIRA-Sistema-Repuestos
 
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/nahuellc1/tifsira.git
-cd tifsira
-```
-
-### 2. Instalar dependencias
-
-```bash
-# Dependencias de PHP
+Instalar dependencias PHP:
 composer install
 
-# Dependencias de Node.js
-npm install
-```
-
-### 3. Configurar variables de entorno
-
-```bash
-# Copiar archivo de ejemplo
+Copiar el archivo de entorno:
 cp .env.example .env
 
-# Generar key de aplicación
+Generar la key de Laravel:
 php artisan key:generate
-```
 
-### 4. Configurar base de datos
+Ejecutar migraciones:
+php artisan migrate --seed
 
-Edita el archivo `.env` con tus credenciales:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=sira_db
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-### 5. Ejecutar migraciones y seeders
-
-```bash
-# Crear tablas
-php artisan migrate
-
-# Cargar datos de prueba
-php artisan db:seed
-```
-
-### 6. Compilar assets
-
-```bash
-npm run dev
-```
-
-### 7. Iniciar servidor de desarrollo
-
-```bash
+Levantar la aplicación:
 php artisan serve
-```
 
-Accede a la aplicación en: **http://localhost:8000**
+* Tests:
 
----
-
-## 👥 Usuarios de Prueba
-
-| Rol | Email | Contraseña |
-|-----|-------|------------|
-| Administrador | admin@italfiat.com | password |
-| Empleado | empleado@italfiat.com | password |
-
----
-
-## 📱 Funcionalidades Principales
-
-### Para Administradores:
-- ➕ Crear, editar y eliminar productos
-- 📦 Gestionar categorías de repuestos
-- 📊 Registrar movimientos de stock (entradas/salidas)
-- 💰 Actualizar precios de productos
-- 👥 Control total del sistema
-
-### Para Empleados:
-- 🔍 Consultar catálogo de productos
-- 📋 Ver stock y precios actualizados
-- 🔎 Buscar productos por código o nombre
-- 📂 Filtrar por categorías
-
----
-
-## 🎯 Metodología de Desarrollo
-
-### Framework Ágil: **Scrum**
-
-- **Sprints**: 4 sprints de 2 semanas
-- **Equipo**: 2 desarrolladores
-- **Duración total**: 190 horas
-
-### Roles del equipo:
-- **Mikaela Alvarez**:  Backend- Frontend (vistas, diseño, validaciones)
-- **Nahuel Coronel**: Backend- Frontend (controladores, BD, autenticación)
-
-
-## 🔒 Seguridad
-
-- 🔐 Contraseñas encriptadas con bcrypt
-- 🛡️ Middleware de autorización por roles
-- 🚫 Protección CSRF en formularios
-- ✅ Validación de datos en servidor
-- 🔑 Gestión segura de sesiones con Laravel Breeze
-
----
-
-## 📊 Base de Datos
-
-### Modelo Relacional:
-
-```
-users (id, name, email, password, role)
-  ↓
-productos (id, codigo, nombre, descripcion, precio, stock, categoria_id)
-  ↓
-categorias (id, nombre, descripcion)
-  ↓
-movimientos (id, producto_id, user_id, tipo, cantidad, fecha)
-```
-### Relaciones:
-- `productos → categorias` (N:1)
-- `productos → movimientos` (1:N)
-- `users → movimientos` (1:N)
-
----
-## 🧪 Testing
-
-### Ejecutar pruebas:
-
-```bash
+Para ejecutar los tests manualmente:
 php artisan test
-```
 
-_(Nota: Las pruebas se implementarán en futuras versiones)_
+Los tests también se ejecutan automáticamente en GitHub Actions en cada push a la rama main.
 
----
-## 📈 Roadmap - Funcionalidades Futuras
+* Estructura principal del proyecto:
 
-- [ ] Módulo de ventas y facturación
-- [ ] Gestión de clientes y cuentas corrientes
-- [ ] Sistema de alertas de stock mínimo
-- [ ] Reportes estadísticos avanzados
-- [ ] Exportación de datos a Excel/PDF
-- [ ] API REST para integraciones
-- [ ] Código de barras para productos
+app/ — controladores, modelos y lógica de negocio
 
----
+database/migrations/ — definición de tablas
 
-## 👨‍💻 Autores
+database/seeders/ — datos iniciales
 
-| Alumno | Legajo | Responsabilidad |
-|--------|--------|-----------------|
-| **Mikaela Alvarez** | 29130 | Frontend & UX |
-| **Nahuel Coronel** | 29150 | Backend & BD |
+resources/views/ — vistas Blade
 
-**Materia**: Metodología de Sistemas II  
-**Institución**: UTN - Tecnicatura Universitaria en Programación  
-**Año**: 2025
+tests/ — tests unitarios y de features
 
----
+.github/workflows/ci.yml — pipeline CI/CD
 
-## 📄 Licencia
+* Pipeline CI/CD:
 
-Este proyecto fue desarrollado con fines académicos para la empresa **Italfiat Repuestos** como Trabajo Final Integrador (TFI).
+El proyecto tiene integrado un pipeline en GitHub Actions que realiza:
 
----
+Instalación de dependencias PHP
 
-## 🙏 Agradecimientos
+Configuración de entorno de testing con SQLite
 
-- **Wenceslao Coronel** - Tutor en Italfiat Repuestos
-- **UTN Formosa** - Tecnicatura Universitaria en Programación
-- Comunidad de Laravel Argentina
+Ejecución de migraciones
 
----
+Ejecución de tests unitarios y de features
 
-## 📞 Contacto
+Verificación de sintaxis PHP
 
-- 📧 Email: nahuelcoronel21@gmail.com - mikaelasolalvarez@gmail.com
-- 🏢 Empresa: Italfiat Repuestos - Formosa, Argentina
+El historial de ejecuciones puede verse en la pestaña “Actions” del repositorio.
+
+* Roles del sistema:
+
+Administrador:
+
+CRUD completo de productos
+
+Gestión de stock
+
+Actualización de precios
+
+Vistas administrativas
+
+Empleado:
+
+Permisos limitados
+
+Visualización de productos
+
+Acceso restringido a operaciones críticas
+
+* Buenas prácticas aplicadas:
+
+El archivo .env no se versiona
+
+Uso de .env.example para configuración limpia
+
+Validaciones centralizadas con Form Requests
+
+Middleware de roles para seguridad
+
+GitHub Actions configurado para verificar cambios antes del merge
+
+Commits organizados siguiendo buenas prácticas
+
+* Contacto
+
+Mikaela Alvarez
+mikaelasolalvarez@gmail.com
+
+Nahuel Coronel
+nahuelcoronel21@gmail.com
