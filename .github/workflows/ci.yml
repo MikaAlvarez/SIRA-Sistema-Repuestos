@@ -13,44 +13,54 @@ jobs:
     steps:
     - name: Checkout código
       uses: actions/checkout@v3
-    
+
+    - name: Cachear dependencias de Composer
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
     - name: Configurar PHP 8.2
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-        extensions: mbstring, xml, ctype, json, mysql, pdo, pdo_mysql
+        extensions: mbstring, xml, ctype, json, pdo, pdo_mysql, sqlite, pdo_sqlite
         coverage: none
-    
+
     - name: Instalar dependencias de Composer
       run: composer install --prefer-dist --no-progress --no-interaction
 
-    - name: Copiar y configurar archivo .env
+    - name: Copiar y configurar .env + key
       run: |
         cp .env.example .env
         php artisan key:generate
-    
-    - name: Crear base de datos SQLite para testing
+
+    - name: Crear BD SQLite
       run: |
         mkdir -p database
         touch database/database.sqlite
-    
-    - name: Configurar base de datos en .env (SQLite)
+
+    - name: Configurar DB para testing
       run: |
         sed -i "s/DB_CONNECTION=.*/DB_CONNECTION=sqlite/" .env
-        sed -i "s/DB_HOST=.*/DB_HOST=/" .env
-        sed -i "s/DB_PORT=.*/DB_PORT=/" .env
         sed -i "s/DB_DATABASE=.*/DB_DATABASE=database\/database.sqlite/" .env
-        sed -i "s/DB_USERNAME=.*/DB_USERNAME=/" .env
-        sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=/" .env
-    
+
     - name: Ejecutar migraciones
       run: php artisan migrate --force
-    
-    - name: Ejecutar tests básicos
+
+    - name: Ejecutar tests
       run: |
-        php artisan test --testsuite=Unit || echo "No hay tests unitarios, continuando..."
-        php artisan test --testsuite=Feature || echo "No hay tests de feature, continuando..."
-    
+        php artisan test --testsuite=Unit || echo "No hay tests unitarios"
+        php artisan test --testsuite=Feature || echo "No hay tests de feature"
+
     - name: Verificar sintaxis PHP
       run: |
-        find app -name "*.php" -exec php -l {} \; | grep -v "No syntax errors"
+        ERRORS=$(find app -name "*.php" -exec php -l {} \; | grep -v "No syntax errors" || true)
+        if [ -n "$ERRORS" ]; then
+          echo "$ERRORS"
+          exit 1
+        else
+          echo "✅ No se encontraron errores de sintaxis."
+        fi
