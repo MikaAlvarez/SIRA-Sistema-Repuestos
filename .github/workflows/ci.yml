@@ -21,13 +21,13 @@ jobs:
         extensions: mbstring, xml, ctype, json, mysql, pdo, pdo_mysql
         coverage: none
     
+    - name: Instalar dependencias de Composer
+      run: composer install --prefer-dist --no-progress --no-interaction
+
     - name: Copiar archivo .env
       run: |
         cp .env.example .env
         php artisan key:generate
-    
-    - name: Instalar dependencias de Composer
-      run: composer install --prefer-dist --no-progress --no-interaction
     
     - name: Crear base de datos SQLite para testing
       run: |
