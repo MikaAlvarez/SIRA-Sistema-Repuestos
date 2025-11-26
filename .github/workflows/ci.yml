@@ -14,7 +14,8 @@ jobs:
     - name: Checkout código
       uses: actions/checkout@v3
 
-    - name: Cachear dependencias de Composer
+    # Cache de dependencias Composer
+    - name: Cache Composer dependencies
       uses: actions/cache@v4
       with:
         path: vendor
@@ -37,30 +38,36 @@ jobs:
         cp .env.example .env
         php artisan key:generate
 
-    - name: Crear BD SQLite
+    - name: Crear base de datos SQLite
       run: |
         mkdir -p database
         touch database/database.sqlite
 
-    - name: Configurar DB para testing
+    - name: Configurar DB SQLite en .env
       run: |
         sed -i "s/DB_CONNECTION=.*/DB_CONNECTION=sqlite/" .env
+        sed -i "s/DB_HOST=.*/DB_HOST=/" .env
+        sed -i "s/DB_PORT=.*/DB_PORT=/" .env
         sed -i "s/DB_DATABASE=.*/DB_DATABASE=database\/database.sqlite/" .env
+        sed -i "s/DB_USERNAME=.*/DB_USERNAME=/" .env
+        sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=/" .env
 
     - name: Ejecutar migraciones
       run: php artisan migrate --force
 
     - name: Ejecutar tests
       run: |
-        php artisan test --testsuite=Unit || echo "No hay tests unitarios"
-        php artisan test --testsuite=Feature || echo "No hay tests de feature"
+        php artisan test --testsuite=Unit || echo "⚠ No hay tests unitarios."
+        php artisan test --testsuite=Feature || echo "⚠ No hay tests de feature."
 
     - name: Verificar sintaxis PHP
       run: |
+        echo "🔍 Analizando archivos PHP..."
         ERRORS=$(find app -name "*.php" -exec php -l {} \; | grep -v "No syntax errors" || true)
         if [ -n "$ERRORS" ]; then
+          echo "❌ Errores encontrados:"
           echo "$ERRORS"
           exit 1
         else
-          echo "✅ No se encontraron errores de sintaxis."
+          echo "✅ No se encontraron errores de sintaxis PHP."
         fi
