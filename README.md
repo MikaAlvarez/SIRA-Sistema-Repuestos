@@ -59,8 +59,6 @@ SIRA es un sistema web diseñado para modernizar la gestión de inventario de re
 - **Categoria**: Clasificación de productos
 - **Movimiento**: Entradas/salidas de stock
 
----
-
 ## Requisitos Previos
 
 - PHP >= 8.2
@@ -68,8 +66,6 @@ SIRA es un sistema web diseñado para modernizar la gestión de inventario de re
 - MySQL >= 8.0
 - Node.js >= 18 (para assets)
 - Git
-
----
 
 ## Instalación y Configuración
 
@@ -174,10 +170,8 @@ Accede a la aplicación en: **http://localhost:8000**
 - **Duración total**: 190 horas
 
 ### Roles del equipo:
-- **Mikaela Alvarez**: Frontend (vistas, diseño, validaciones)
-- **Nahuel Coronel**: Backend (controladores, BD, autenticación)
-
----
+- **Mikaela Alvarez**:  Backend- Frontend (vistas, diseño, validaciones)
+- **Nahuel Coronel**: Backend- Frontend (controladores, BD, autenticación)
 
 
 ## 🔒 Seguridad
@@ -189,8 +183,6 @@ Accede a la aplicación en: **http://localhost:8000**
 - 🔑 Gestión segura de sesiones con Laravel Breeze
 
 ---
-
-
 
 ## 📊 Base de Datos
 
@@ -205,15 +197,12 @@ categorias (id, nombre, descripcion)
   ↓
 movimientos (id, producto_id, user_id, tipo, cantidad, fecha)
 ```
-
 ### Relaciones:
 - `productos → categorias` (N:1)
 - `productos → movimientos` (1:N)
 - `users → movimientos` (1:N)
 
 ---
-
-
 ## 🧪 Testing
 
 ### Ejecutar pruebas:
@@ -225,8 +214,6 @@ php artisan test
 _(Nota: Las pruebas se implementarán en futuras versiones)_
 
 ---
-
-
 ## 📈 Roadmap - Funcionalidades Futuras
 
 - [ ] Módulo de ventas y facturación
@@ -240,7 +227,6 @@ _(Nota: Las pruebas se implementarán en futuras versiones)_
 ---
 
 ## 👨‍💻 Autores
-
 
 | Alumno | Legajo | Responsabilidad |
 |--------|--------|-----------------|
@@ -268,7 +254,6 @@ Este proyecto fue desarrollado con fines académicos para la empresa **Italfiat 
 ---
 
 ## 📞 Contacto
-
 
 - 📧 Email: nahuelcoronel21@gmail.com - mikaelasolalvarez@gmail.com
 - 🏢 Empresa: Italfiat Repuestos - Formosa, Argentina
