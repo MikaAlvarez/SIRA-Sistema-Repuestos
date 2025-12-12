@@ -1,17 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Editar Producto') }}
+            ✏️ Editar Producto
         </h2>
     </x-slot>
 
     <div class="py-10 bg-gray-100 min-h-screen">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
 
-            {{-- Errores de validación --}}
+            {{-- Mensajes de error --}}
             @if($errors->any())
-                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-                    <ul class="list-disc list-inside">
+                <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded-lg mb-4 shadow-sm">
+                    <ul class="list-disc ml-4 text-sm">
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -19,65 +19,127 @@
                 </div>
             @endif
 
-            {{-- Formulario --}}
-            <div class="bg-white shadow-sm sm:rounded-lg p-6">
-                <form action="{{ route('productos.update', $producto) }}" method="POST" class="space-y-4">
+            {{-- Tarjeta del formulario --}}
+            <div class="bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+
+                <form action="{{ route('productos.update', $producto) }}" method="POST" class="space-y-6">
                     @csrf
                     @method('PUT')
 
+                    {{-- Código --}}
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Código</label>
-                        <input type="text" name="codigo" value="{{ old('codigo', $producto->codigo) }}" 
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" 
-                               required>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">
+                            Código del producto *
+                        </label>
+                        <input 
+                            type="text" 
+                            name="codigo" 
+                            value="{{ old('codigo', $producto->codigo) }}"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring-red-600"
+                            required
+                        >
                     </div>
 
+                    {{-- Nombre --}}
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Nombre</label>
-                        <input type="text" name="nombre" value="{{ old('nombre', $producto->nombre) }}" 
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" 
-                               required>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">
+                            Nombre *
+                        </label>
+                        <input 
+                            type="text" 
+                            name="nombre" 
+                            value="{{ old('nombre', $producto->nombre) }}"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring-red-600"
+                            required
+                        >
                     </div>
 
+                    {{-- Categoría --}}
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Categoría</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">
+                            Categoría
+                        </label>
+
                         <div class="flex gap-2">
-                            <select name="categoria"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+                            <select 
+                                name="categoria"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring-red-600"
+                            >
                                 <option value="">Sin categoría</option>
+
                                 @foreach(\App\Models\Categoria::orderBy('nombre')->get() as $cat)
-                                    <option value="{{ $cat->nombre }}" 
-                                            {{ old('categoria', $producto->categoria) == $cat->nombre ? 'selected' : '' }}>
+                                    <option 
+                                        value="{{ $cat->nombre }}"
+                                        {{ old('categoria', $producto->categoria) == $cat->nombre ? 'selected' : '' }}
+                                    >
                                         {{ $cat->nombre }}
                                     </option>
                                 @endforeach
                             </select>
-                            <a href="{{ route('categorias.create') }}" 
-                               class="mt-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 whitespace-nowrap"
-                               title="Crear nueva categoría">
+
+                            {{-- Botón nueva categoría --}}
+                            <a 
+                                href="{{ route('categorias.create') }}"
+                                class="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transition font-semibold text-sm"
+                                title="Crear nueva categoría"
+                            >
                                 + Nueva
                             </a>
                         </div>
                     </div>
 
+                    {{-- Stock --}}
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Stock</label>
-                        <input type="number" name="stock" value="{{ old('stock', $producto->stock) }}" 
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" 
-                               min="0" required>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">
+                            Stock *
+                        </label>
+                        <input 
+                            type="number" 
+                            name="stock" 
+                            value="{{ old('stock', $producto->stock) }}"
+                            min="0"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring-red-600"
+                            required
+                        >
                     </div>
 
+                    {{-- Precio --}}
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Precio</label>
-                        <input type="number" step="0.01" name="precio" value="{{ old('precio', $producto->precio) }}" 
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" 
-                               min="0.01" required>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">
+                            Precio *
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-2 text-gray-500">$</span>
+                            <input 
+                                type="number" 
+                                step="0.01" 
+                                name="precio" 
+                                value="{{ old('precio', $producto->precio) }}"
+                                min="0.01"
+                                class="w-full pl-7 rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring-red-600"
+                                required
+                            >
+                        </div>
                     </div>
 
-                    <div class="flex justify-end gap-3 pt-4 border-t">
-                        <a href="{{ route('productos.index') }}" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">Cancelar</a>
-                        <button type="submit" class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700">Guardar cambios</button>
+                    {{-- Botones --}}
+                    <div class="flex justify-end gap-4 pt-4 border-t border-gray-200">
+
+                        <a 
+                            href="{{ route('productos.index') }}" 
+                            class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold transition"
+                        >
+                            Cancelar
+                        </a>
+
+                        <button 
+                            type="submit"
+                            class="px-5 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white font-semibold shadow transition flex items-center gap-2"
+                        >
+                            💾 Guardar cambios
+                        </button>
                     </div>
+
                 </form>
             </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,16 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
         Route::put('/{categoria}', [CategoriaController::class, 'update'])->name('categorias.update');
         Route::delete('/{categoria}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
     });
+    // 👥 Módulo de Usuarios (solo admin)
+// ===================================================================
+Route::middleware(['role:admin'])->prefix('usuarios')->group(function () {
+    Route::get('/', [UsuarioController::class, 'index'])->name('usuarios.index');
+    Route::get('/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+    Route::post('/', [UsuarioController::class, 'store'])->name('usuarios.store');
+    Route::get('/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+    Route::put('/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+    Route::delete('/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+});
 
     // 🧰 Ruta temporal de depuración
     Route::get('/debug-role', function () {
