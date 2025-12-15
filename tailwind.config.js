@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import flowbite from 'flowbite/plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,7 +10,7 @@ export default {
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js",
 
-        // Archivos usados por Laravel Breeze/Fortify/Jetstream
+        // Laravel
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
     ],
@@ -24,6 +25,7 @@ export default {
 
     plugins: [
         forms,
-        require('flowbite/plugin'),
+        flowbite,
     ],
 };
+

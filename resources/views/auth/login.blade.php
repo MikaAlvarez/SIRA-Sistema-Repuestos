@@ -44,15 +44,10 @@
                 <!-- Acciones -->
                 <div class="flex items-center justify-between mt-6">
 
-                    @if (Route::has('password.request'))
-                        <a class="text-sm text-gray-600 hover:text-red-600"
-                           href="{{ route('password.request') }}">
-                            ¿Olvidó su contraseña?
-                        </a>
-                    @endif
+
 
                     <button type="submit"
-                        class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow">
+                        class="px-8 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow">
                         Acceder
                     </button>
                 </div>

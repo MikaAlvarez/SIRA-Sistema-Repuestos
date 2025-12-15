@@ -51,7 +51,30 @@ class UsuarioController extends Controller
     }
 
     // 🔄 Actualizar usuario
-    
+    public function update(Request $request, User $usuario)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $usuario->id,
+        'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+        'role' => 'required|in:admin,empleado',
+    ]);
+
+    // Actualizar nombre, email y rol
+    $usuario->name = $validated['name'];
+    $usuario->email = $validated['email'];
+    $usuario->role = $validated['role'];
+
+    // Solo actualizar la contraseña si se proporcionó una nueva
+    if (!empty($validated['password'])) {
+        $usuario->password = Hash::make($validated['password']);
+    }
+
+    $usuario->save();
+
+    return redirect()->route('usuarios.index')
+        ->with('success', 'Usuario actualizado correctamente.');
+}
 
     // 🗑️ Eliminar usuario
     public function destroy(User $usuario)

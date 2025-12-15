@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -10,7 +11,7 @@
             {{-- 🔴 Mensaje de bienvenida --}}
             <div class="bg-gradient-to-r from-red-600 to-red-700 shadow-xl rounded-xl p-7 text-white">
                 <h3 class="text-2xl font-extrabold mb-1">
-                    ¡Bienvenido, {{ auth()->user()->name }}! 👋
+                    ¡Hola, {{ auth()->user()->name }}! 👋
                 </h3>
 
                 <p class="text-red-100 text-sm tracking-wide">
@@ -86,10 +87,11 @@
                 </div>
 
                 {{-- Valor inventario --}}
+                @if(auth()->user()->role === 'admin')
                 <div class="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 border-t-4 border-green-600">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-gray-500 uppercase font-semibold tracking-wide">Valor Inventario</p>
+                            <p class="text-sm text-gray-500 uppercase font-semibold tracking-wide">Valor de Inventario</p>
                             <p class="text-3xl font-extrabold text-green-700 mt-2">
                                 ${{ number_format($valorInventario, 0, ',', '.') }}
                             </p>
@@ -102,10 +104,8 @@
                         </div>
                     </div>
                 </div>
-
+            @endif
             </div>
-
-
 
             {{-- 🔴 Dos columnas --}}
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">

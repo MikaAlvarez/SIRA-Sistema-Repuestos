@@ -10,9 +10,11 @@ class CategoriaController extends Controller
     // 📋 Listar categorías
     public function index()
     {
-        $categorias = Categoria::withCount('productos')->orderBy('nombre')->get();
-        
-        return view('categorias.index', compact('categorias'));
+        $categorias = Categoria::withCount('productos')
+        ->orderBy('nombre')
+        ->paginate(15);
+    
+    return view('categorias.index', compact('categorias'));
     }
 
     // ➕ Crear categoría
