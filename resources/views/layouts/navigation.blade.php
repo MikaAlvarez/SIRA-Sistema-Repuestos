@@ -120,7 +120,7 @@
             <a href="{{ route('dashboard') }}"
                class="block pl-3 pr-4 py-2 border-l-4 text-gray-900 transition
                {{ request()->routeIs('dashboard') ? 'border-red-600 bg-red-50 font-bold' : 'border-transparent hover:bg-gray-100' }}">
-                📊 Dashboard
+                📊 Panel Principal
             </a>
 
             <!-- PRODUCTOS -->

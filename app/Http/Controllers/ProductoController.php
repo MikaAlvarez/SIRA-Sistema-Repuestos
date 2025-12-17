@@ -67,11 +67,19 @@ class ProductoController extends Controller
     // ✏️ Editar producto
     public function edit(Producto $producto)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
         return view('productos.edit', compact('producto'));
     }
 
     public function update(Request $request, Producto $producto)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
         logger('🎯 ProductoController@update ejecutado', [
             'user' => auth()->user()?->only(['id','name','role']),
             'producto_id' => $producto->id,
@@ -97,6 +105,10 @@ class ProductoController extends Controller
     // 🗑️ Eliminar producto
     public function destroy(Producto $producto)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
         logger('🎯 ProductoController@destroy ejecutado', [
             'user' => auth()->user()?->only(['id','name','role']),
             'producto_id' => $producto->id,

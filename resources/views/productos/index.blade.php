@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl font-bold text-gray-800">
-            📦 Gestión de Productos
+         Gestión de Productos
         </h2>
     </x-slot>
 

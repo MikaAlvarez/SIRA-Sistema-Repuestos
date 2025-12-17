@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             Nuevo Producto
         </h2>
     </x-slot>
 
     <div class="py-10 bg-gray-100 min-h-screen">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- ❗ Errores de validación --}}
             @if($errors->any())
@@ -20,7 +20,10 @@
             @endif
 
             {{-- 📦 Card del formulario --}}
-            <div class="bg-white shadow-lg rounded-lg p-8 border-t-4 border-red-600">
+            <div class="bg-white shadow-lg rounded-xl p-6 sm:p-8
+                border-t-4 border-red-600
+                w-full max-w-4xl mx-auto">
+
 
                 <form action="{{ route('productos.store') }}" method="POST" class="space-y-6">
                     @csrf
@@ -56,7 +59,7 @@
                     <div>
                         <label class="block text-sm font-semibold text-gray-700">Categoría</label>
 
-                        <div class="flex gap-3">
+                        <div class="flex flex-col sm:flex-row gap-3">
                             <select 
                                 name="categoria"
                                 class="input-red w-full"

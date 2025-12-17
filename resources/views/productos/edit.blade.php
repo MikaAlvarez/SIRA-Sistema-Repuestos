@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             ✏️ Editar Producto
         </h2>
     </x-slot>
 
     <div class="py-10 bg-gray-100 min-h-screen">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             {{-- Mensajes de error --}}
             @if($errors->any())
@@ -20,9 +20,9 @@
             @endif
 
             {{-- Tarjeta del formulario --}}
-            <div class="bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+            <div class="bg-white shadow-lg rounded-xl p-6 sm:p-8 border border-gray-200 w-full max-w-4xl mx-auto">
 
-                <form action="{{ route('productos.update', $producto) }}" method="POST" class="space-y-6">
+                <form action="{{ route('productos.update', $producto) }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @csrf
                     @method('PUT')
 
@@ -60,7 +60,7 @@
                             Categoría
                         </label>
 
-                        <div class="flex gap-2">
+                        <div class="flex flex-col sm:flex-row gap-2">
                             <select 
                                 name="categoria"
                                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring-red-600"
@@ -83,7 +83,7 @@
                                 class="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transition font-semibold text-sm"
                                 title="Crear nueva categoría"
                             >
-                                + Nueva
+                                 Nueva
                             </a>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                     </div>
 
                     {{-- Botones --}}
-                    <div class="flex justify-end gap-4 pt-4 border-t border-gray-200">
+                    <div class="md:col-span-2 flex justify-end gap-4 pt-4 border-t border-gray-200">
 
                         <a 
                             href="{{ route('productos.index') }}" 
